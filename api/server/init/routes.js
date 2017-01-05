@@ -10,6 +10,7 @@ ROUTES NOTES:
 
 Tags: 
 	- Use the 'api' tag to have routes show up in the swagger-ui view
+	- Use the 'socket' tag to register that route as a `Nes` socket subscription
 
 Auth:
 	- Authentication has been enabled by default to all routes, unless specified otherwise with an `auth` node of the `config` for the route (ie `auth: false`)
@@ -160,7 +161,7 @@ const routes = (server) => [{
 	config: {
 		handler: handlers.votes.getVotesForCharacterById,
 		description: 'Gets all the votes for a Star Wars character',
-		tags: ['api', 'v1', 'vote'],
+		tags: ['api', 'v1', 'vote', 'socket'],
 		validate: {
 			params: {
 				id: joi

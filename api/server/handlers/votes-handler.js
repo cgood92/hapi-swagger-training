@@ -50,11 +50,11 @@ const postVoteForCharacterById = (server) => (request, reply) => {
 			if (snapshot) {
 				// Get the new updated votes for this character
 				getVotesForCharacterById(request, (data) => {
-					reply(data);
+					// Publish to subscribed `Nes` clients
+					server.publish(`/api/v1/vote/${character_id}`, data);
 				});
-			} else {
-				reply();
 			}
+			reply();
 		}).catch((err = new Error()) => {
 			return reply(boom.wrap(err));
 		});

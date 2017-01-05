@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi'),
+	subscriptions = require('./modules/subscriptions'),
 	plugins = require('./modules/plugins'),
 	routes = require('./init/routes'),
 	basicAuthValidation = require('./modules/auth').basicAuth;
@@ -24,6 +25,9 @@ const start = (host, port) => {
 
 			// Initialize routes
 			server.route(routes(server));
+
+			// Setup which routes host subscriptions
+			subscriptions(server);
 
 			// Start accepting requests
 			server.start( (err) => {

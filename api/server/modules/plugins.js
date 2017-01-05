@@ -7,6 +7,7 @@ const Swagger = require('./swagger'),
 	Blipp = { register: require('blipp'), options: { showAuth: true } },
 	BasicAuth = require('hapi-auth-basic'),
 	Cors = require('./cors'),
-	Version = require('./version');
+	Version = require('./version'),
+	Nes = require('nes');
 
-module.exports = [Swagger, Inert, Vision, Good, Blipp, BasicAuth, Cors, Version];
+module.exports = [Swagger, Inert, Vision, Good, Blipp, BasicAuth, Cors, Version, Nes];
