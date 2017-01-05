@@ -16,6 +16,8 @@ To see all routes, [click here](/).
 
 To see V1 routes only, [click here](/?tags=v1).
 
+To see V2 routes only, [click here](/?tags=v2).
+
 To view the swagger.json, [click here](/swagger.json).
 				`,
 			// Get the version from package.json
@@ -60,7 +62,7 @@ To view the swagger.json, [click here](/swagger.json).
 		},{
 			// Group all star wars related routes together
 			replaceIn: 'groups',
-			pattern: /\/(character)/,
+			pattern: /\/(character|planet)/,
 			replacement: '/starwars'
 		}]
 	}

@@ -20,16 +20,19 @@ Validation:
 Response Schema:
 	- Validates the outgoing response, making sure it contains all of the appropriate object keys and types
 
+Versions:
+	- Include the version in the path, and the module hapi-api-version should take care of the rest
+
 */
 
-// Passing in server
+// Passing in server, mostly to deal with server.publish in the different handlers
 const routes = (server) => [{
 	method: 'GET',
 	path: '/api/v1/characters',
-	tags: ['api', 'v1', 'starwars'],
 	config: {
 		handler: handlers.characters.getAllCharacters,
 		description: 'Gets all the Star Wars characters',
+		tags: ['api', 'v1', 'starwars'],
 		validate: {
 			query: {
 				page: joi
@@ -57,10 +60,10 @@ const routes = (server) => [{
 },{
 	method: 'GET',
 	path: '/api/v1/character/{name}',
-	tags: ['api', 'v1', 'starwars'],
 	config: {
 		handler: handlers.characters.getCharacterByName,
 		description: 'Gets info on a single Star Wars character',
+		tags: ['api', 'v1', 'starwars'],
 		validate: {
 			params: {
 				name: joi
@@ -75,11 +78,89 @@ const routes = (server) => [{
 	}
 },{
 	method: 'GET',
+	path: '/api/v1/planets',
+	config: {
+		handler: handlers.planets.getAllPlanets,
+		description: 'Gets all the Star Wars planets',
+		tags: ['api', 'v1', 'starwars'],
+		response: {
+			schema: handlers.planets.schema.planets
+		}
+	}
+},{
+	method: 'GET',
+	path: '/api/v2/planets',
+	config: {
+		handler: handlers.planets.getAllPlanetsAndFetchUrls,
+		description: 'Gets all the Star Wars planets, and swap out URL\'s for useful data',
+		tags: ['api', 'v2', 'starwars'],
+		response: {
+			schema: handlers.planets.schema.planetsV2
+		}
+	}
+},{
+	// A lively debate could be stirred up as to whether this endpoint should be a POST or a GET.  There are some arguments that a POST should be used when handling sensitive data.  I haven't made up my own opinion about this yet, and so I am going to simply leave this as a GET, with the understanding that there may be a better practice out there.
+	method: 'GET',
+	path: '/api/v1/user',
+	config: {
+		handler: handlers.user.getUser,
+		description: 'Get the user object from the database',
+		tags: ['api', 'v1', 'user'],
+		validate: {
+			query: {
+				username: joi
+					.string()
+					.required()
+					.description('username'),
+				password: joi
+					.string()
+					.required()
+					.description('password')
+			}
+		},
+		response: {
+			schema: handlers.user.schema.user
+		},
+		auth: false
+	}
+},{
+	method: 'POST',
+	path: '/api/v1/user',
+	config: {
+		handler: handlers.user.newUser,
+		description: 'Post a new user object to the database',
+		tags: ['api', 'v1', 'user'],
+		validate: {
+			payload: {
+				username: joi
+					.string()
+					.required()
+					.description('username'),
+				password: joi
+					.string()
+					.required()
+					.description('password'),
+				scope: joi
+					.string()
+					.valid(auth.scopes)
+					.description('scope')
+			}
+		},
+		response: {
+			schema: handlers.user.schema.user
+		},
+		// Only allow ADMIN's to have access to this route.  In the database there should be a node on the user to indicate their scope.  Valid scopes can be found in ../handlers/auth.js.
+		auth: {
+			scope: ['ADMIN']
+		}
+	}
+},{
+	method: 'GET',
 	path: '/api/v1/vote/{id}',
 	config: {
 		handler: handlers.votes.getVotesForCharacterById,
 		description: 'Gets all the votes for a Star Wars character',
-		tags: ['api', 'v1', 'vote', 'socket'],
+		tags: ['api', 'v1', 'vote'],
 		validate: {
 			params: {
 				id: joi
@@ -136,61 +217,6 @@ const routes = (server) => [{
 		},
 		response: {
 			schema: handlers.votes.schema.post
-		}
-},{
-	// A lively debate could be stirred up as to whether this endpoint should be a POST or a GET.  There are some arguments that a POST should be used when handling sensitive data.  I haven't made up my own opinion about this yet, and so I am going to simply leave this as a GET, with the understanding that there may be a better practice out there.
-	method: 'GET',
-	path: '/api/v1/user',
-	config: {
-		handler: handlers.user.getUser,
-		description: 'Get the user object from the database',
-		tags: ['api', 'v1', 'user'],
-		validate: {
-			query: {
-				username: joi
-					.string()
-					.required()
-					.description('username'),
-				password: joi
-					.string()
-					.required()
-					.description('password')
-			}
-		},
-		response: {
-			schema: handlers.user.schema.user
-		},
-		auth: false
-	}
-},{
-	method: 'POST',
-	path: '/api/v1/user',
-	config: {
-		handler: handlers.user.newUser,
-		description: 'Post a new user object to the database',
-		tags: ['api', 'v1', 'user'],
-		validate: {
-			payload: {
-				username: joi
-					.string()
-					.required()
-					.description('username'),
-				password: joi
-					.string()
-					.required()
-					.description('password'),
-				scope: joi
-					.string()
-					.valid(auth.scopes)
-					.description('scope')
-			}
-		},
-		response: {
-			schema: handlers.user.schema.user
-		},
-		// Only allow ADMIN's to have access to this route.  In the database there should be a node on the user to indicate their scope.  Valid scopes can be found in ../handlers/auth.js.
-		auth: {
-			scope: ['ADMIN']
 		}
 	}
 }];
