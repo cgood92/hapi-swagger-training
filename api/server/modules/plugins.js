@@ -3,6 +3,7 @@
 const Swagger = require('./swagger'),
 	Inert = require('inert'),
 	Vision = require('vision'),
-	Good = require('./good');
+	Good = require('./good'),
+	Blipp = { register: require('blipp'), options: { showAuth: true } };
 
-module.exports = [Swagger, Inert, Vision, Good];
+module.exports = [Swagger, Inert, Vision, Good, Blipp];
