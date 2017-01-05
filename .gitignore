@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# ignore general files
+api/node_modules
+client/node_modules
+client/dist
+
+# ignore project-specific firebase config
+api/firebase_credentials.json
