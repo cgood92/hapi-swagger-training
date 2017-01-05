@@ -7,6 +7,9 @@ const joi = require('joi'),
 
 ROUTES NOTES:
 
+Tags: 
+	- Use the 'api' tag to have routes show up in the swagger-ui view
+
 Validation:
 	- Use the validation to validate the incoming request's query, params, and payload
 
@@ -19,6 +22,7 @@ Response Schema:
 const routes = (server) => [{
 	method: 'GET',
 	path: '/api/v1/characters',
+	tags: ['api', 'v1', 'starwars'],
 	config: {
 		handler: handlers.characters.getAllCharacters,
 		description: 'Gets all the Star Wars characters',
@@ -49,6 +53,7 @@ const routes = (server) => [{
 },{
 	method: 'GET',
 	path: '/api/v1/character/{name}',
+	tags: ['api', 'v1', 'starwars'],
 	config: {
 		handler: handlers.characters.getCharacterByName,
 		description: 'Gets info on a single Star Wars character',
