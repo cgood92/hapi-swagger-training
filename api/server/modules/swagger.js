@@ -38,6 +38,9 @@ To view the swagger.json, [click here](/swagger.json).
 		},{
 			'name': 'vote',
 			'description': 'working with voting'
+		},{
+			'name': 'user',
+			'description': 'working with users'
 		}],
 		// This is for use of grouping together paths.  Since each of our paths begin with `/api/v{1,2}`, we want to ignore those first to arguments in the path, since they won't help us group together resources
 		pathPrefixSize: 2,

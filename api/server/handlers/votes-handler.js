@@ -8,7 +8,8 @@ const boom = require('boom'),
 const postVoteForCharacterById = (server) => (request, reply) => {
 	const { id: character_id } = request.params,
 		{ type } = request.payload,
-		user_id = 'YOUR_USER_ID';
+		// Get the user ID from auth object, which is provided by the hapi-auth-basic plugin
+		user_id = request.auth.credentials.id,
 		// Making a composite key so that we can query based on 2 objects at the same time
 		compositeKeyName = 'user_id:character_id',
 		compositeKey = `${user_id}:${character_id}`,
@@ -62,7 +63,8 @@ const postVoteForCharacterById = (server) => (request, reply) => {
 // Schema: get
 const getVotesForCharacterById = (request, reply) => {
 	const { id: character_id } = request.params,
-		user_id = 'YOUR_USER_ID';
+		// Get the user ID from auth object, which is provided by the hapi-auth-basic plugin
+		user_id = request.auth.credentials.id;
 	db.database()
 		.ref('votes/characters')
 		.orderByChild('character_id')
@@ -95,7 +97,7 @@ const getVotesForCharacterById = (request, reply) => {
 // Schema: delete
 const deleteVoteForCharacterById = (request, reply) => {
 	const { id: character_id } = request.params,
-		user_id = 'YOUR_USER_ID';
+		user_id = request.auth.credentials.id;
 	db.database()
 		.ref('votes/characters')
 		.orderByChild('user_id')

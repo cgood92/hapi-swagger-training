@@ -1,7 +1,8 @@
 'use strict';
 
 const joi = require('joi'),
-	handlers = require('../handlers');
+	handlers = require('../handlers'),
+	auth = require('../modules/auth');
 
 /*
 
@@ -9,6 +10,9 @@ ROUTES NOTES:
 
 Tags: 
 	- Use the 'api' tag to have routes show up in the swagger-ui view
+
+Auth:
+	- Authentication has been enabled by default to all routes, unless specified otherwise with an `auth` node of the `config` for the route (ie `auth: false`)
 
 Validation:
 	- Use the validation to validate the incoming request's query, params, and payload
@@ -133,6 +137,62 @@ const routes = (server) => [{
 		response: {
 			schema: handlers.votes.schema.post
 		}
+},{
+	// A lively debate could be stirred up as to whether this endpoint should be a POST or a GET.  There are some arguments that a POST should be used when handling sensitive data.  I haven't made up my own opinion about this yet, and so I am going to simply leave this as a GET, with the understanding that there may be a better practice out there.
+	method: 'GET',
+	path: '/api/v1/user',
+	config: {
+		handler: handlers.user.getUser,
+		description: 'Get the user object from the database',
+		tags: ['api', 'v1', 'user'],
+		validate: {
+			query: {
+				username: joi
+					.string()
+					.required()
+					.description('username'),
+				password: joi
+					.string()
+					.required()
+					.description('password')
+			}
+		},
+		response: {
+			schema: handlers.user.schema.user
+		},
+		auth: false
+	}
+},{
+	method: 'POST',
+	path: '/api/v1/user',
+	config: {
+		handler: handlers.user.newUser,
+		description: 'Post a new user object to the database',
+		tags: ['api', 'v1', 'user'],
+		validate: {
+			payload: {
+				username: joi
+					.string()
+					.required()
+					.description('username'),
+				password: joi
+					.string()
+					.required()
+					.description('password'),
+				scope: joi
+					.string()
+					.valid(auth.scopes)
+					.description('scope')
+			}
+		},
+		response: {
+			schema: handlers.user.schema.user
+		},
+		// Only allow ADMIN's to have access to this route.  In the database there should be a node on the user to indicate their scope.  Valid scopes can be found in ../handlers/auth.js.
+		auth: {
+			scope: ['ADMIN']
+		}
+	}
 }];
 
 module.exports = routes;
