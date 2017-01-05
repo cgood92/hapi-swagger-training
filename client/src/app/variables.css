@@ -1,0 +1,41 @@
+:root {
+	--blue: #001777;
+	--green: #2AA876;
+	--yellow: #FFD265;
+	--orange: #F19C65;
+	--red: #CE4D45;
+	--black: #1e1e20;
+	--white: #FFFFFA;
+	--gray: #5B605F;
+	--darkgray: #2A2C2B;
+	--lightgray: #A1A194;
+
+	--serif: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	--sans: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+
+
+	@custom-media --xs-min (width >= 320px);
+	@custom-media --xs-max (width < 320px);
+	@custom-media --xs-only (width >= 320px) and (width < 500px);
+
+	@custom-media --s-min (width >= 500px);
+	@custom-media --s-max (width < 500px);
+	@custom-media --s-only (width >= 500) and (width < 640);
+
+	@custom-media --m-min (width >= 640px);
+	@custom-media --m-max (width < 640px);
+	@custom-media --m-only (width >= 640) and (width < 900);
+
+	@custom-media --l-min (width >= 900px);
+	@custom-media --l-max (width < 900px);
+	@custom-media --l-only (width >= 900px) and (width < 1200px);
+
+	@custom-media --xl-min (width >= 1200px);
+	@custom-media --xl-max (width < 1200px);
+	@custom-media --xl-only (width >= 1200px) and (width < 1500px);
+
+	@custom-media --xxl-min (width >= 1500px);
+	@custom-media --xxl-max (width < 1500px);
+
+
+}

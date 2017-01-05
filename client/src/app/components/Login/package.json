@@ -1,0 +1,5 @@
+{
+	"name": "Login",
+	"main": "Login.js",
+	"storybook": "LoginStory.js"
+}

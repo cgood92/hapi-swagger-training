@@ -1,0 +1,21 @@
+.paper {
+	--length: 500px;
+	width: var(--length);
+	height: var(--length);
+	margin: 0 auto;
+
+	& .form {
+		--margin: 100px;
+		position: relative;
+		top: calc(50% - var(--margin));
+		left: calc(50% - var(--margin)*1.5);
+		display: inline-block;
+		width: calc(var(--length) - var(--margin));
+		height: calc(var(--length) - var(--margin));
+
+		& .submitButton {
+			width: 200px;
+		}
+	}
+}
+

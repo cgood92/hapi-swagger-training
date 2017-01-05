@@ -1,0 +1,25 @@
+@import 'variables.css';
+
+.header {
+	align-items: center;
+	background: var(--blue);
+	color: var(--white);
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 1em;
+	padding-top: 1em;
+}
+
+.link {
+	color: var(--white);
+	text-decoration: none;
+}
+
+.logo__img {
+	width: 25px;
+	vertical-align: middle;
+}
+
+.logo__text {
+	margin-left: 10px;
+}

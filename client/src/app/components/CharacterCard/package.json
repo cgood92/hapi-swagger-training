@@ -1,0 +1,5 @@
+{
+	"name": "CharacterCard",
+	"main": "CharacterCard.js",
+	"storybook": "CharacterCardStory.js"
+}
