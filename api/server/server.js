@@ -1,10 +1,8 @@
 'use strict';
 
 const Hapi = require('hapi'),
-	subscriptions = require('./modules/subscriptions'),
 	plugins = require('./modules/plugins'),
-	routes = require('./init/routes'),
-	basicAuthValidation = require('./modules/auth').basicAuth;
+	routes = require('./init/routes');
 
 const start = (host, port) => {
 	return new Promise((resolve, reject) => {
@@ -20,14 +18,8 @@ const start = (host, port) => {
 				return reject(err);
 			}
 
-			// Basic HTTP auth - the 3rd param is `true`, which will turn on validation by default for all routes, unless specified specifically on the route itself
-			server.auth.strategy('basic', 'basic', true, { validateFunc: basicAuthValidation });
-
 			// Initialize routes
 			server.route(routes(server));
-
-			// Setup which routes host subscriptions
-			subscriptions(server);
 
 			// Start accepting requests
 			server.start( (err) => {
