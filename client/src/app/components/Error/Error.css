@@ -1,0 +1,16 @@
+.container {
+}
+
+.header {
+	padding: 2vh 1vw;
+}
+
+.title,
+.subtitle {
+	font-weight: normal;
+	margin: 0;
+}
+
+.subtitle {
+	font: normal .95em/1 "serif";
+}

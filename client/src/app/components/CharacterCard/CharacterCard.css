@@ -1,0 +1,60 @@
+.details {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 150px;
+
+	& .label {
+		color: gray;
+
+		&:after {
+			content: ":";
+		}
+	}
+
+	& .value {
+
+	}
+
+	& li {
+		margin: .5rem 0;
+	}
+}
+
+.chip_wrapper {
+	& .inline {
+		display: inline-block;
+	}
+	& .right {
+		float: right;
+	}
+}
+
+.voteCount {
+	position: absolute;
+}
+
+.voteCountSpacer {
+	display: inline-block;
+	width: 12px;
+}
+
+.highlight-enter {
+	display: inline-block;
+	font-size: 16px;
+	color: yellow;
+}
+
+.highlight-enter.highlight-enter-active {
+	font-size: 14px;
+	color: white;
+	transition: all 200ms cubic-bezier(0.87, -0.41, 0, 2.32);
+}
+
+.highlight-leave {
+	font-size: 0;
+}
+
+.highlight-leave.highlight-leave-active {
+	font-size: 0;
+}

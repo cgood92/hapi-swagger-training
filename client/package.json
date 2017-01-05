@@ -1,0 +1,105 @@
+{
+  "name": "react-starter",
+  "version": "1.0.1",
+  "description": "An Isomorphic React Starter",
+  "main": "index.js",
+  "scripts": {
+    "predev": "npm run build",
+    "dev": "npm-run-all -p dev:*",
+    "build": "npm-run-all -p build:*",
+    "start": "node dist/server.js",
+    "lint": "eslint src",
+    "components": "start-storybook -p 9999",
+    "build:client": "better-npm-run build:client",
+    "build:server": "better-npm-run build:server",
+    "dev:client": "better-npm-run dev:client",
+    "dev:server": "better-npm-run dev:server"
+  },
+  "betterScripts": {
+    "dev:client": {
+      "command": "webpack-dev-server --hot --inline --history-api-fallback --config webpack.client.babel.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "dev:server": {
+      "command": "node dist/server.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build:client": {
+      "command": "webpack --quiet --no-info --config webpack.client.babel.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build:server": {
+      "command": "webpack --quiet --no-info --config webpack.server.babel.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+  "author": "Jared Anderson",
+  "license": "MIT",
+  "devDependencies": {
+    "@kadira/storybook": "^1.28.1",
+    "autoprefixer": "^6.1.2",
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.2.1",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-react-require": "^2.1.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "css-loader": "^0.23.0",
+    "enzyme": "^2.0.0",
+    "eslint": "^2.7.0",
+    "eslint-plugin-react": "^4.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "json-loader": "^0.5.4",
+    "normalize.css": "^4.1.1",
+    "postcss-cssnext": "^2.4.0",
+    "postcss-import": "^8.1.2",
+    "postcss-loader": "^0.8.0",
+    "react-addons-test-utils": "^15.0.1",
+    "style-loader": "^0.13.0",
+    "tape": "^4.4.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "webpack-node-externals": "^1.2.0"
+  },
+  "dependencies": {
+    "better-npm-run": "0.0.8",
+    "btoa": "^1.1.2",
+    "compression": "^1.6.1",
+    "cors": "^2.7.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "form-serialize": "^0.7.1",
+    "gridlayout": "^1.0.2",
+    "helmet": "^1.1.0",
+    "html-minifier": "^1.2.0",
+    "is-in-browser": "^1.0.2",
+    "isomorphic-fetch": "^2.2.1",
+    "join-classnames": "^1.0.0",
+    "lodash": "^4.17.3",
+    "material-ui": "^0.16.5",
+    "nes": "^6.4.0",
+    "npm-run-all": "^1.5.1",
+    "react": "^15.0.1",
+    "react-addons-css-transition-group": "^15.4.1",
+    "react-dom": "^15.0.1",
+    "react-helmet": "^3.0.1",
+    "react-redux": "^4.4.2",
+    "react-router": "^2.1.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.4.0",
+    "redux-persist": "^4.0.1",
+    "redux-thunk": "^2.0.1",
+    "string-hash": "^1.1.0"
+  }
+}
