@@ -1,6 +1,7 @@
 'use strict';
 
 const joi = require('joi'),
+	boom = require('boom'),
 	swapi = require('../data/swapi'),
 	transform = require('../transforms/characters-transform');
 
@@ -11,7 +12,7 @@ const getAllCharacters = (request, reply) => {
 		.then(data => transform.characters(data))
 		.then(data => reply(data))
 		.catch((err = new Error()) => {
-			return reply().code(500);
+			return reply(boom.wrap(err));
 		});
 };
 
@@ -21,7 +22,7 @@ const getCharacterByName = (request, reply) => {
 		.then(data => transform.character(data))
 		.then(data => reply(data))
 		.catch((err = new Error()) => {
-			return reply().code(500);
+			return reply(boom.wrap(err));
 		});
 };
 
