@@ -74,8 +74,8 @@ Your API will be running on the host and port: [http://localhost:3000/](http://l
 
 ## Available trainings
 
-1. [UtahJS training](https://github.com/cgood92/hapi-swagger-training/blob/utahjs/README.md) 
+1. [UtahJS training](https://github.com/cgood92/hapi-swagger-training/tree/utahjs) 
 
 ## Other
 
-- Postman
+- [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
