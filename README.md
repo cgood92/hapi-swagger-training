@@ -1,5 +1,11 @@
 # UtahJS Training
 
+## Presentation Video
+
+[https://youtu.be/6HPOMsNeDk8](https://youtu.be/6HPOMsNeDk8)
+
+## Setup
+
 First, follow the setup steps for this project as found here: [https://github.com/cgood92/hapi-swagger-training/blob/master/README.md](https://github.com/cgood92/hapi-swagger-training/blob/master/README.md).
 
 ## Training
